@@ -38,6 +38,6 @@
       - { param: 'general_log', value: '1' }
 
   roles:
-  - aws-network
-  - aws-bastion
-  #- aws-rds
+   - aws-network
+   - aws-bastion
+   #- aws-rds
