@@ -1,9 +1,9 @@
----
+--
 - hosts: localhost
   connection: local
   vars:
-    region: "{{region}}"
-    aws_network_name: "{{aws_network_name}}"
+    region: eu-west-1
+    aws_network_name: dev
   tasks:
 
     - name: Get Bastion EC2 ID using instance
@@ -14,7 +14,7 @@
           "tag:Name": "{{ aws_network_name }}-bastion"
       register: ec2_facts
 
-#    - debug: "var=ec2_facts"
+#         - debug: "var=ec2_facts"
 
     - name: Destroy Bastion
       ec2:
