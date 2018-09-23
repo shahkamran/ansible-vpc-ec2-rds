@@ -1,0 +1,4 @@
+---
+#- include: cleanup-rds.yml
+- include: cleanup-bastian.yml
+- include: cleanup-networks.yml

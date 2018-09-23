@@ -40,4 +40,4 @@
   roles:
   - aws-network
   - aws-bastian
-  - aws-rds
+#  - aws-rds
