@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    region: eu-west-1
+    aws_network_name: dev
+  tasks:
+    - name: Get Bastion EC2 ID
+      ec2_remote_facts:
+        region: "{{ region }}"
+        filters:
+          "tag:Name": "{{ aws_network_name }}-bastion"
+      register: ec2_facts
+
+    - name: Destroy Bastion
+      ec2:
+        instance_ids: "{{ item.id }}"
+        state: absent
+        region: "{{ region }}"
+      with_items: "{{ ec2_facts.instances }}"
