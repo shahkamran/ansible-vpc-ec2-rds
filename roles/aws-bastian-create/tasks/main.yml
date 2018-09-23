@@ -57,4 +57,4 @@
   debug:
     var: bastion_public_ip
 #
-
+#
