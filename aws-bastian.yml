@@ -43,15 +43,15 @@
 
 - debug: "var=bastion_facts"
 
-- name: "Capture Bastion public IP 1"
+- name: Capture Bastion public IP
   set_fact:
     bastion_public_ip: "{{ bastion_facts['instances'][0]['public_ip'] }}"
-  when: bastion_facts['instances'] | length > 0
+  when: bastion_facts['instances'] | length &gt; 0
 
-- name: "Capture Bastion public IP 2"
+- name: Capture Bastion public IP
   set_fact:
     bastion_public_ip: "{{ bastion_facts['tagged_instances'][0]['public_ip'] }}"
-  when: bastion_facts['tagged_instances'] | length > 0
+  when: bastion_facts['tagged_instances'] | length &gt; 0
 
 - name: Display Public IP
   debug:

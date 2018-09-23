@@ -1,16 +1,15 @@
 ---
 - name: Build VPC
-  ec2_vpc_net:
+  ec2_vpc_net_facts:
     name: "{{ aws_network_name }}-vpc"
     state: present
     cidr_block: "{{ vpc_cidr }}"
     region: "{{ region }}"
-  register: vpcnet
 
 - name: Get VPC ID
   ec2_vpc_net_facts:
       region: "{{ region }}"
-#      state: present
+      state: present
       filters:
         "tag:Name": "{{ aws_network_name }}-vpc"
   register: vpc_facts
@@ -23,7 +22,6 @@
   ec2_vpc_subnet:
     state: present
     vpc_id: "{{ vpc_facts['vpcs'][0]['id'] }}"
-#    vpc_id: "{{ vpcnet.vpc.id }}"
     cidr: "{{ private_subnet_1_cidr }}"
     region: "{{ region }}"
     az: "{{ private_subnet_1_az }}"
