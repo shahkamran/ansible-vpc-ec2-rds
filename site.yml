@@ -9,13 +9,11 @@
 #
 #
 #
-
 - name: Deploy RDS Infrastructure
   hosts: localhost
   connection: local
   gather_facts: false
-
   roles:
-  - aws-network-create
-  - aws-bastian-create
+   - aws-network-create
+   - aws-bastian-create
 #  - aws-rds-create

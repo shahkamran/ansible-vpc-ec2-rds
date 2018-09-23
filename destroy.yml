@@ -4,5 +4,14 @@
 #
 # Uncomment below line if you had created RDS instance. 
 #- include: cleanup-rds.yml
-- include: cleanup-bastian.yml
-- include: cleanup-networks.yml
+#- include: cleanup-bastian.yml
+#- include: cleanup-networks.yml
+
+- name: Destroy all infrastructure components
+  hosts: localhost
+  connection: local
+  roles:
+   - aws-rds-delete
+   - aws-bastian-delete
+   - aws-network-delete
+
