@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+#    region: "eu-west-1"
+#    aws_network_name: dev
+   region_name: "{{ region }}"
+   region: eu-west-1
+  tasks:
+    - name: Show variables
+      debug:
+       var: region_name
