@@ -1,4 +1,8 @@
 ---
+#
+# Clean up of all of the infrastructure you have created in this project.
+#
+# Uncomment below line if you had created RDS instance. 
 #- include: cleanup-rds.yml
 - include: cleanup-bastian.yml
 - include: cleanup-networks.yml

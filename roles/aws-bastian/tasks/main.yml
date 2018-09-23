@@ -10,18 +10,18 @@
   debug:
     var: public_subnet['subnets'][0]['id']
 
-- name: Get bastion SG ID
+- name: Get bastion Security Group ID
   ec2_group_facts:
     region: "{{ region }}"
     filters:
       group-name: "{{ aws_network_name }}-bastion"
   register: bastion_sg
 
-- name: Bastion SG ID
+- name: Bastion Security Group ID
   debug:
     var: bastion_sg['security_groups'][0]['group_id']
 
-- name: Create Bastion
+- name: Create EC2 Bastion Instance
   ec2:
     region: "{{ region }}"
     key_name: "{{ key_pair }}"
@@ -43,17 +43,17 @@
 
 - debug: "var=bastion_facts"
 
-- name: "Capture Bastion public IP 1"
+- name: "Capture Bastion public IP attempt 1"
   set_fact:
     bastion_public_ip: "{{ bastion_facts['instances'][0]['public_ip'] }}"
   when: bastion_facts['instances'] | length > 0
 
-- name: "Capture Bastion public IP 2"
+- name: "Capture Bastion public IP attempt 2"
   set_fact:
     bastion_public_ip: "{{ bastion_facts['tagged_instances'][0]['public_ip'] }}"
   when: bastion_facts['tagged_instances'] | length > 0
 
-- name: Display Public IP
+- name: Display Bastian Server Public IP
   debug:
     var: bastion_public_ip
 #

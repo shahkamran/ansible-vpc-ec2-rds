@@ -2,12 +2,12 @@
 - hosts: localhost
   connection: local
   vars:
-    region: eu-west-1
-    aws_network_name: dev
-    vpc_cidr: 10.4.0.0/16
-    public_subnet_cidr: 10.4.0.0/24
-    private_subnet_1_cidr: 10.4.1.0/24
-    private_subnet_2_cidr: 10.4.2.0/24
+    region: "{{region}}"
+    aws_network_name: "{{aws_network_name}}"
+    vpc_cidr: "{{vpc_cidr}}"
+    public_subnet_cidr: "{{public_subnet_cidr}}"
+    private_subnet_1_cidr: "{{private_subnet_1_cidr}}"
+    private_subnet_2_cidr: "{{private_subnet_2_cidr}}"
   gather_facts: False
   tasks:
     - name: Get VPC ID

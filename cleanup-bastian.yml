@@ -2,8 +2,8 @@
 - hosts: localhost
   connection: local
   vars:
-    region: eu-west-1
-    aws_network_name: dev
+    region: "{{region}}"
+    aws_network_name: "{{aws_network_name}}"
   tasks:
 
     - name: Get Bastion EC2 ID using instance

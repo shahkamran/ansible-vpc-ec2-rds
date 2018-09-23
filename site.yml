@@ -1,8 +1,14 @@
 ---
-# This playbook deploys the whole AWS Network, Bastion, Web, and RDS Instances.  Web Configuration is currently manual
-# - Must have credentials exported for AWS IAM
-# - RDS may take up to 30 minutes to deploy the instance
-
+#
+#
+# AWS credentials must be provided securely in ~/.boto file in following format.
+#  [Credentials]
+#  AWS_ACCESS_KEY_ID=A...................Z
+#  AWS_SECRET_ACCESS_KEY=A..............................Z
+#
+#
+#
+#
 - name: Deploy RDS Infrastructure
   hosts: localhost
   connection: local
@@ -10,34 +16,37 @@
   vars:
 
 # Global AWS Variables
-    region: eu-west-1
-    aws_network_name: dev
+    region: "{{region}}"
+    aws_network_name: "{{aws_network_name}}"
 
 # VPC Variables
-    vpc_cidr: 10.4.0.0/16
-    public_subnet_cidr: 10.4.0.0/24
-    public_subnet_az: eu-west-1a
-    private_subnet_1_cidr: 10.4.1.0/24
-    private_subnet_1_az: eu-west-1b
-    private_subnet_2_cidr: 10.4.2.0/24
-    private_subnet_2_az: eu-west-1c
+    vpc_cidr: "{{vpc_cidr}}"
+    public_subnet_cidr:"{{public_subnet_cidr}}"
+    public_subnet_az: "{{public_subnet_az}}"
+    private_subnet_1_cidr: "{{private_subnet_1_cidr}}"
+    private_subnet_2_cidr: "{{private_subnet_2_cidr}}"
+    private_subnet_1_az: "{{private_subnet_1_az}}"
+    private_subnet_2_az: "{{private_subnet_2_az}}"
 
 # Bastion Variables
-    ec2_id: "ami-00035f41c82244dab"
-    key_pair: "ansible-eu-west-1"
+    ec2_id: "{{ec2_id}}"
+    key_pair: "{{key_pair}}"
 
 # RDS Variables
-    rds_user: root
-    rds_pass: r0Ot3r123
-    rds_instance_type: db.t2.small
-    rds_size_gb: 15
-    rds_parameter_engine: mysql5.6
-    rds_instance_engine: 5.6.34
-    rds_parameters:
-      - { param: 'binlog_format', value: 'ROW' }
-      - { param: 'general_log', value: '1' }
+    rds_user: "{{rds_user}}"
+    rds_pass: "{{rds_pass}}"
+    rds_instance_type: "{{rds_instance_type}}"
+    rds_size_gb: "{{rds_size_gb}}"
+    rds_parameter_engine: "{{rds_parameter_engine}}"
+    rds_instance_engine: "{{rds_instance_engine}}"
+    rds_parameters: "{{rds_parameters}}"
+
 
   roles:
+  # This will set up PVC, Networks and other requirement specially for this project.
   - aws-network
+  # This will create a bastian host.
   - aws-bastian
+  # This creates RDS instance.
+  # RDS instance takes up to 30 minutes to deploy, only enable when sure.
 #  - aws-rds

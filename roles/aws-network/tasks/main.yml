@@ -1,5 +1,5 @@
 ---
-- name: Build VPC
+- name: Building a new VPC
   ec2_vpc_net:
     name: "{{ aws_network_name }}-vpc"
     state: present
@@ -15,7 +15,7 @@
         "tag:Name": "{{ aws_network_name }}-vpc"
   register: vpc_facts
 
-- name: VPC ID
+- name: List VPC ID
   debug:
     var: vpc_facts['vpcs'][0]['id']
 
@@ -23,7 +23,6 @@
   ec2_vpc_subnet:
     state: present
     vpc_id: "{{ vpc_facts['vpcs'][0]['id'] }}"
-#    vpc_id: "{{ vpcnet.vpc.id }}"
     cidr: "{{ private_subnet_1_cidr }}"
     region: "{{ region }}"
     az: "{{ private_subnet_1_az }}"
@@ -31,7 +30,7 @@
       Name: "{{ aws_network_name }}-private1"
   register: private_subnet_1
 
-- name: subnet MySQL database servers ID 1
+- name: List subnet MySQL database servers ID 1
   debug:
     var: private_subnet_1['subnet']['id']
 
@@ -46,7 +45,7 @@
       Name: "{{ aws_network_name }}-private2"
   register: private_subnet_2
 
-- name: subnet MySQL database servers ID 2
+- name: List subnet MySQL database servers ID 2
   debug:
     var: private_subnet_2['subnet']['id']
 
@@ -61,7 +60,7 @@
       Name: "{{ aws_network_name }}-public"
   register: public_subnet
 
-- name: Subnet public ID
+- name: List subnet public ID
   debug:
     var: public_subnet['subnet']['id']
 
@@ -72,7 +71,7 @@
     region: "{{ region }}"
   register: igw
 
-- name: Internet gateway ID
+- name: List internet gateway ID
   debug:
     var: igw['gateway_id']
 
@@ -92,7 +91,7 @@
         gateway_id: "{{ igw['gateway_id'] }}"
   register: public_route_table
 
-- name: Bastion Security group
+- name: Create Bastion Security group
   ec2_group:
     name: "{{ aws_network_name }}-bastion"
     state: present
@@ -106,11 +105,11 @@
         cidr_ip: 0.0.0.0/0
   register: bastion_sg
 
-- name: Bastion Security group ID
+- name: List Bastion Security group ID
   debug:
     var: bastion_sg['group_id']
 
-- name: Web Security group
+- name: Create Web Security group
   ec2_group:
     name: "{{ aws_network_name }}-web"
     state: present
@@ -128,11 +127,11 @@
         group_id: "{{ bastion_sg['group_id'] }}"
   register: web_sg
 
-- name: Web Security group ID
+- name: List Web Security group ID
   debug:
     var: web_sg['group_id']
 
-- name: MySQL Security group
+- name: Create MySQL Security group
   ec2_group:
     name: "{{ aws_network_name }}-private"
     state: present
@@ -154,6 +153,6 @@
         group_id: "{{ web_sg['group_id'] }}"
   register: mysql_sg
 
-- name: MySQL Security group ID
+- name: List MySQL Security group ID
   debug:
     var: mysql_sg['group_id']
