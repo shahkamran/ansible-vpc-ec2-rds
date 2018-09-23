@@ -56,3 +56,4 @@
 - name: Display Public IP
   debug:
     var: bastion_public_ip
+#
