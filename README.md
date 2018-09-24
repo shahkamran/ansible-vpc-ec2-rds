@@ -21,13 +21,13 @@ You must have following before running this playbook.
  
 # How to
 
-Add AWS Security Key credentials to ~/.boto file.
-Create a new EC2 Key Pair and secure the private key.
-Download repository using "git clone repositoryURL" command.
-Amend variables listed in group_vars/all/vars and add your settings or preferences.
-If you want RDS creation modify site.yml and uncomment RDS role. Please note RDS creation takes up to 30 minutes and incurs additional charges.
-To provision infrastructure run "ansible-playbook site.yml".
-To clean-up and terminiate your infrastructure you can run "ansible-playbook destroy.yml".
+ * Add AWS Security Key credentials to ~/.boto file.
+ * Create a new EC2 Key Pair and secure the private key.
+ * Download repository using "git clone repositoryURL" command.
+ * Amend variables listed in group_vars/all/vars and add your settings or preferences.
+ * If you want RDS creation modify site.yml and uncomment RDS role. Please note RDS creation takes up to 30 minutes and incurs additional charges.
+ * To provision infrastructure run "ansible-playbook site.yml".
+ * To clean-up and terminiate your infrastructure you can run "ansible-playbook destroy.yml".
 
 # Enjoy
 Simple as that.
