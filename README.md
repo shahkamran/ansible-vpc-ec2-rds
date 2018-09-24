@@ -3,13 +3,14 @@ Setting up AWS infrastructure with a Bastian server and RDS within its dedicated
 
 # Objectives
 In this repository you will be carrying out following tasks in automated way.
- * Create a new VPC
- * Create VPC Subnets
- * Create VPC Routes
- * Create Security Groups
- * Create EC2 Instance
- * Create RDS Instance
- * Clean-up to terminate all above
+
+- [x] Create a new VPC
+- [x] Create VPC Subnets
+- [x] Create VPC Routes
+- [x] Create Security Groups
+- [x] Create EC2 Instance
+- [x] Create RDS Instance
+- [x] Clean-up to terminate all above
 
 # Prerequisites
 You must have following before running this playbook.
