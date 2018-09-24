@@ -1,4 +1,4 @@
-# ansibleinfrastructuresetup
+# Ansible to create VPC, Networks, EC2 Instance and RDS
 Setting up AWS infrastructure with a Bastian server and RDS within its dedicated VPC and associated elements.
 
 # Prerequisites
