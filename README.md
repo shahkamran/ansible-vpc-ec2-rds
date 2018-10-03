@@ -17,7 +17,8 @@ You must have following before running this playbook.
  * AWS Account
  * AWS IAM Security Key and credentials
  * AWS EC2 Key Pair
- * A Linux computer or instance with Ansible, Git and required Python tools installed.
+ * A Linux computer or instance with Ansible, Git, Boto and required Python tools installed.
+ * pip install ansible botocore boto3 boto
  * This repository
  
 # How to
